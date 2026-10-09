@@ -1,0 +1,317 @@
+“AI-Based Road Damage Detection and Geospatial Mapping System”
+
+An Intelligent Computer Vision Platform for Automated Road Condition Monitoring, Localization & Maintenance Support
+
+Submitted to
+
+School of Engineering 
+
+Submitted by
+
+(Kushal Agarwal2023-B-01072003)
+
+(Piyush Pingane     2023-B-05092005A)
+
+(Prem Bhandakkar2023-B-14032006)
+
+(Kanishk Talaha2023-B-19022005D)
+
+                                       (School of Engineering)
+
+                                         (B-tech cse
+
+                                          B-tech AIDS)
+
+                                        
+
+Final Year Project Title Proposal
+
+Name of the School:  
+
+Ajeenkya DY Patil University School of Engineering
+
+Name of the Program:
+
+BTECH- CSE , BTECH-AIDS
+
+Name of the Students:
+
+Kushal AgarwalPiyush PinganePrem BhandakkarKanishk Talaha
+
+URN No.:
+
+2023-B-010720032023-B-05092005A2023-B-140320062023-B-19022005D
+
+Name of the Tentative Guide:
+
+ 
+
+Dr. Pradip Salve
+
+Research Objectives
+
+(Minimum 4 and Maximum 6)
+
+RO1: To develop an AI-based computer vision system for road-damage detection and classification.
+
+RO2: To train and evaluate a YOLO model for potholes and major crack types.
+
+RO3: To integrate GPS information for geographic localization of detected damage.
+
+RO4: To estimate visual damage severity for maintenance prioritization.
+
+RO5: To build a web dashboard and interactive map for visualizing road damage.
+
+RO6: To evaluate detection, localization, speed, and usability.
+
+INTRODUCTION
+
+Road infrastructure is a critical component of transportation, economic activity, and public safety. Roads are continuously exposed to traffic loading, weather, water infiltration, temperature changes, construction activity, and natural deterioration. These factors can produce potholes, longitudinal cracks, transverse cracks, alligator cracks, and other surface defects. Conventional road inspection often depends on manual surveys in which personnel visually inspect road segments and record defects. Although manual inspection can provide useful information, it can be time-consuming, difficult to scale, and dependent on the consistency of individual inspectors.
+
+Recent progress in artificial intelligence and computer vision has created an opportunity to automate a significant part of road-condition monitoring. A camera mounted on a vehicle, motorcycle, or other inspection platform can continuously capture road images or video. A deep-learning object detector can then identify visible damage and determine its approximate location within each frame. Research has already demonstrated the feasibility of detecting road damage from smartphone and vehicle-mounted images, providing a foundation for practical automated inspection systems.
+
+The proposed project, AI-Based Road Damage Detection and Geospatial Mapping System, combines computer vision with geographic information to create a complete road-monitoring workflow. The system accepts road images or video frames, preprocesses the visual data, and applies a trained object detection model to identify damage categories. The detected class, confidence score, bounding-box coordinates, image reference, and other relevant information are then recorded. When GPS information is available, the detection is associated with geographic coordinates so that road defects can be visualized on a digital map.
+
+The system is designed around a practical deployment scenario. A smartphone or camera can be mounted on a vehicle and used to collect road imagery while the vehicle moves through a selected route. The inference pipeline processes frames at suitable intervals, filters low-confidence detections, and stores validated detections. A backend service can expose the collected information to a web dashboard where users can inspect individual defects, view statistics, filter by damage type or severity, and observe clusters of damaged locations on a map.
+
+An important part of the proposed system is the transformation of raw detections into actionable geospatial information. A bounding box alone indicates that damage is visible in an image, but maintenance teams also need to know where the damage occurred. By combining detection results with GPS coordinates, the system can generate a road-damage inventory that supports inspection planning, prioritization, and follow-up surveys. The prototype is intended as a decision-support tool and does not replace engineering inspection or official road-maintenance procedures.
+
+The scope of the project includes dataset preparation, object detection, model evaluation, GPS-based localization, database storage, map visualization, and a web-based interface. The implementation can use Python, OpenCV, a YOLO-family detector, FastAPI, SQLite, React or a lightweight dashboard framework, and mapping technologies such as Leaflet/OpenStreetMap. The architecture is modular so that more advanced severity estimation, edge deployment, multi-camera support, and real-time vehicle integration can be introduced in future versions.
+
+LITERATURE SURVEY
+
+The literature survey focuses on research in automated road-condition assessment, deep-learning object detection, public road monitoring, and geospatial infrastructure management. Existing studies show that computer vision can reduce the manual effort required to identify road defects, while large benchmark datasets have made it possible to compare detection approaches across countries and road environments.
+
+1. Maeda et al. (2018), “Road Damage Detection and Classification Using Deep Neural Networks with Smartphone Images,” demonstrated road-damage detection using images captured by a smartphone mounted on a vehicle. The study prepared a large road-damage dataset and investigated object-detection methods for identifying multiple types of surface damage. This work established an important practical basis for vehicle-based automated road inspection.
+
+2. Arya et al. (2022/2024), “RDD2022: A multi-national image dataset for automatic road damage detection,” introduced a large benchmark dataset containing road images from Japan, India, the Czech Republic, Norway, the United States, and China. The dataset contains more than 47,000 images and more than 55,000 annotated damage instances across longitudinal cracks, transverse cracks, alligator cracks, and potholes. Its multinational nature makes it particularly useful for evaluating generalization across different road environments.
+
+3. Redmon et al. (2016), “You Only Look Once: Unified, Real-Time Object Detection,” introduced YOLO as a single-stage object detection framework capable of predicting object locations and classes directly from an image. The real-time design of YOLO makes the family of detectors suitable for applications where inference speed is important, including mobile and vehicle-based road inspection.
+
+4. Recent road-damage detection studies have explored one-stage detectors, two-stage detectors, transformer-based models, and transfer learning. These approaches demonstrate that performance depends not only on model architecture but also on image quality, class imbalance, road conditions, camera position, lighting, and the diversity of training data. This motivates the use of a representative dataset and careful evaluation rather than relying only on a single accuracy value.
+
+5. Smartphone-based inspection research has also shown the value of combining visual recognition with mobile sensing. A practical road-monitoring application can use cameras already available on consumer devices and can record road imagery while simultaneously obtaining location information. This reduces the need for specialized hardware and supports low-cost data collection.
+
+6. Geospatial approaches to infrastructure monitoring emphasize the importance of location-aware asset information. Linking computer-vision detections to coordinates allows defects to be represented as spatial records rather than isolated images. Such records can support map-based inspection, route analysis, maintenance planning, and comparison of road conditions over time.
+
+7. Research on intelligent transportation systems increasingly combines machine learning, sensing, mapping, and data management. The combination of AI-based detection and geographic visualization is relevant because road agencies need both recognition of defects and an understandable representation of where those defects occur.
+
+8. Existing studies also identify challenges such as varying illumination, shadows, rain, motion blur, occlusion, road texture, camera vibration, and differences between countries or road surfaces. These limitations indicate that a robust system must include appropriate preprocessing, confidence thresholds, data augmentation, validation on unseen road images, and clear reporting of uncertainty.
+
+9. Overall finding: previous work establishes that deep learning can automate road-damage detection and that benchmark datasets such as RDD2022 provide a strong foundation for experimentation. However, many academic prototypes focus mainly on detection metrics. The proposed project extends this workflow by integrating detection results with GPS-based localization, severity-oriented analysis, database storage, and map-based visualization in one practical system.
+
+Overall finding: previous work establishes that deep learning can automate road-damage detection and that benchmark datasets such as RDD2022 provide a strong foundation for experimentation. However, many academic prototypes focus mainly on detection metrics. The proposed project extends this workflow by integrating detection results with GPS-based localization, severity-oriented analysis, database storage, and map-based visualization in one practical system.
+
+RESEARCH GAP
+
+Existing road-damage detection research demonstrates strong progress in image-based defect recognition, but several practical gaps remain when moving from a laboratory model to a location-aware road-monitoring system. Many studies concentrate on improving detection accuracy while treating data collection, localization, storage, and visualization as separate tasks.
+
+First, a large number of systems report detection performance without integrating the output into a geospatial asset-management workflow. A road agency or maintenance team needs to know not only what damage has been detected but also where it is located, how frequently it occurs along a route, and which locations may require further inspection.
+
+Second, road imagery varies considerably because of camera height, viewing angle, vehicle speed, weather, illumination, shadows, road materials, and traffic. A model trained on a limited visual environment may not generalize well to unseen roads. A practical prototype therefore needs diverse data, augmentation, validation images, and explicit evaluation across different conditions.
+
+Third, many implementations identify damage but do not provide a structured mechanism for severity or maintenance prioritization. Detection confidence is not the same as physical severity. The proposed system therefore treats severity estimation as an auxiliary decision-support layer based on visual and detection-derived features, while recognizing that final engineering assessment requires field verification.
+
+Fourth, there is a gap between computer-vision inference and an accessible user interface. Raw model outputs such as class IDs, confidence values, and bounding boxes are useful for developers but are less useful to maintenance personnel. A map dashboard can convert those outputs into understandable road-condition information, filters, counts, and location-based records.
+
+Fifth, a college-scale prototype must remain affordable, testable, and maintainable. Specialized survey vehicles and expensive sensing equipment may not be available. The proposed architecture therefore emphasizes vehicle-mounted cameras or smartphones, open datasets, modular Python services, lightweight storage, and standard web mapping technologies.
+
+Thus, the proposed work addresses the gap by integrating image-based road-damage detection, GPS-based localization, structured storage, severity-oriented analysis, and geospatial visualization in a single modular workflow. Future versions can incorporate edge inference, temporal tracking, 3D depth estimation, automated route coverage analysis, and verified municipal data integration.
+
+PROBLEM IDENTIFICATION
+
+Problem Statement: Road authorities and maintenance teams need timely and reliable information about road-surface defects, but manual inspection of large road networks can be labor-intensive and difficult to update continuously. Existing image-based detection systems may identify damage without providing an integrated mechanism for geographic localization, visualization, and maintenance-oriented analysis.
+
+Road defects such as potholes and cracks can develop at different rates and can vary significantly in size and appearance. A road network may contain many kilometres of pavement, making frequent manual inspection difficult. When defects are recorded using photographs without precise location information, maintenance teams may also need additional field work to determine the exact position of each reported problem.
+
+The motivation for the proposed system is to reduce the effort involved in identifying and locating visible road damage. A camera-equipped vehicle can collect road imagery during normal travel or dedicated inspection routes. The computer-vision model can automatically identify damage, while GPS can associate the detection with a geographic coordinate. This produces a structured record that is easier to search, analyze, and visualize.
+
+The system is intended to support, rather than replace, professional road inspection. Model predictions can contain false positives and false negatives, and visible surface appearance does not always reveal the structural condition of pavement. Therefore, the dashboard can present confidence values and detection evidence so that a human operator can review important records before maintenance decisions are made.
+
+The first prototype focuses on a controlled and reproducible workflow using a public road-damage dataset, a trained object-detection model, sample GPS information, a database, and a map-based interface. It does not require confidential municipal data. This approach allows the computer-vision and geospatial components to be validated independently before integration with real road-maintenance systems.
+
+The project is relevant because it combines artificial intelligence, computer vision, geographic information, database management, and web development around a real-world infrastructure problem. Its scope includes detection, localization, visualization, analytics, and evaluation, with future extensions for real-time edge deployment and larger-scale road-network monitoring.
+
+OBJECTIVES
+
+The objectives of the proposed system are specific, measurable, and achievable within the project scope:
+
+RO1 – Automated Road-Damage Detection: Develop a computer-vision pipeline that detects and classifies visible road damage from road images or video frames.
+
+RO2 – Model Training and Evaluation: Train and evaluate a YOLO-family object detector for potholes, longitudinal cracks, transverse cracks, and alligator cracks using an annotated road-damage dataset.
+
+RO3 – Geospatial Localization: Associate detected damage with GPS coordinates and store the results as structured geospatial records for route-based analysis.
+
+RO4 – Severity-Oriented Analysis: Develop an interpretable method for categorizing detections into practical severity levels using visual and detection-derived features, while clearly separating this from formal engineering assessment.
+
+RO5 – Mapping and Dashboard: Create a user-friendly dashboard that displays detections, confidence values, damage categories, statistics, and locations on an interactive map.
+
+RO6 – System Evaluation: Evaluate the complete workflow using precision, recall, F1-score, IoU/mAP, localization consistency, processing time, and usability measures.
+
+EXISTING SYSTEM ANALYSIS
+
+Existing systems for road-condition monitoring can be broadly divided into manual inspection processes, smartphone-based applications, image-processing and deep-learning prototypes, and integrated intelligent transportation platforms.
+
+Manual road inspection remains an important approach because trained personnel can observe context and make engineering judgments. Its limitation is that large road networks require considerable time and repeated field visits. Manual records can also be difficult to standardize when different inspectors use different descriptions or severity criteria.
+
+Smartphone-based inspection systems reduce hardware requirements by using cameras already available on mobile devices or vehicles. Earlier research demonstrated that smartphone images can be used to detect and classify road damage. However, camera placement, motion blur, lighting, and device differences can affect the visual input and therefore the reliability of predictions.
+
+Image-processing approaches based on handcrafted features can identify certain crack or pothole patterns, but they often require carefully designed thresholds and may struggle with changes in pavement texture and environmental conditions. Deep-learning methods reduce the need for manual feature engineering by learning visual representations from annotated examples.
+
+Object detectors such as YOLO process an image and predict the locations and classes of visible objects. Their single-stage design is attractive for near-real-time applications. Nevertheless, a detector alone does not solve the full road-monitoring problem because the output still needs to be stored, localized, reviewed, and communicated to end users.
+
+Benchmark datasets such as RDD2022 improve the research environment by providing multi-country images and standardized damage annotations. Such datasets make model training and comparison more reproducible, but performance on a benchmark does not automatically guarantee reliable deployment on every local road or camera setup.
+
+Mapping platforms can display road-damage records using geographic coordinates, but a map without an automated detection pipeline still requires manual data entry. Conversely, a computer-vision system without mapping produces isolated detections that are harder to use operationally.
+
+The proposed system combines these functions in a single workflow: image acquisition → preprocessing → AI detection → confidence filtering → GPS association → database storage → severity-oriented analysis → map visualization → dashboard review. The novelty is therefore primarily in the integration and practical workflow rather than claiming a completely new detection algorithm.
+
+The system is intentionally modular. The validated detection model can be improved without redesigning the database or dashboard, and the mapping layer can accept detections from different camera platforms. This allows future versions to incorporate edge devices, route coverage tracking, temporal duplicate removal, or integration with municipal asset-management systems.
+
+PROPOSED SYSTEM METHODOLOGY USED
+
+The proposed system follows a modular computer-vision and geospatial data-processing methodology. The workflow begins with road-image or video acquisition from a vehicle-mounted camera, smartphone, or stored dataset. Frames are then preprocessed and passed to a trained object-detection model. The model returns damage classes, confidence scores, and bounding-box coordinates for each detected defect.
+
+The dataset layer contains road images and corresponding annotations. For the prototype, RDD2022 can be used as a primary training and evaluation resource because it includes road images from multiple countries and covers longitudinal cracks, transverse cracks, alligator cracks, and potholes. Data preparation includes annotation conversion when necessary, image resizing, train/validation/test separation, class inspection, and augmentation.
+
+The first computational layer is object detection. A YOLO-family detector is selected because it can provide bounding boxes and class probabilities in a single inference pipeline. The model is trained using transfer learning where appropriate and evaluated on images that are not used for training. Confidence thresholds are applied to reduce very low-confidence predictions before storing the results.
+
+The next layer is geospatial association. When the camera platform provides GPS coordinates, each frame or detection is assigned the nearest valid location record. The prototype can store latitude, longitude, timestamp, road segment identifier where available, damage class, confidence, bounding-box information, and image reference. A more advanced version can synchronize camera and GPS timestamps more precisely and remove repeated detections of the same physical defect.
+
+The severity-oriented module converts model outputs into a simple decision-support category such as low, medium, or high. The prototype may consider factors such as estimated bounding-box area relative to the image, damage class, confidence, and repeated observations. This is not intended to represent structural pavement severity; it provides a consistent visual-priority indicator that can be reviewed by a human operator.
+
+The storage layer uses a lightweight relational database such as SQLite for the prototype. A road-damage record can contain an ID, damage type, confidence, latitude, longitude, timestamp, severity category, image path, and review status. This structured representation allows filtering, aggregation, and future migration to a larger database such as PostgreSQL/PostGIS if required.
+
+The visualization layer presents the processed information through a web dashboard. The dashboard can provide total detections, damage-type counts, confidence distributions, severity counts, recent inspection routes, image previews, and an interactive map. Map markers can be filtered by damage type and severity so that users can focus on specific categories or locations.
+
+Development follows an incremental methodology: problem definition → literature survey → dataset preparation → annotation conversion → model training → evaluation → GPS/data schema → backend integration → geospatial mapping → dashboard → end-to-end testing. The modular design allows the detection model and geospatial components to be evaluated separately before complete integration.
+
+TECHNOLOGY & TOOLS SELECTION
+
+Technology selection is driven by the project's need for computer vision, model training, geospatial processing, a maintainable backend, and an accessible demonstration interface.
+
+Computer Vision and AI: Python with OpenCV is used for image/video handling and preprocessing. A YOLO-family detector from the Ultralytics ecosystem can be used for training and inference. NumPy and related scientific libraries support numerical operations and data preparation.
+
+Model Training: PyTorch-based deep-learning tooling can be used through the selected detection framework. Transfer learning, data augmentation, confidence thresholds, and validation metrics are considered during training. The primary evaluation measures are precision, recall, F1-score, IoU and mAP, together with inference time where relevant.
+
+Backend: FastAPI with Python can expose endpoints for uploading images, running inference, retrieving detection records, and providing statistics to the frontend. Using Python across the computer-vision and backend layers reduces integration complexity and allows the trained model to be loaded directly by the service.
+
+Database: SQLite is suitable for the initial prototype because it is lightweight, simple to configure, and sufficient for structured detection records. For larger deployment, PostgreSQL with PostGIS can provide stronger geospatial querying, indexing, and multi-user support.
+
+Mapping: Leaflet with OpenStreetMap-based tiles can be used for interactive map visualization. The application can represent latitude and longitude as map markers and can later be extended to display routes, road segments, heatmaps, and clustering of repeated damage observations.
+
+Frontend and Dashboard: React with Vite can provide a professional interface with reusable components such as navigation, summary cards, filters, image previews, tables, and map views. Alternatively, a Streamlit prototype can be used during early experimentation to reduce development time. The final architecture can retain React/FastAPI for a more scalable demonstration.
+
+Hardware and Software: Development can be performed on a standard student laptop/desktop with a GPU when available. A smartphone or USB camera can be used for sample road-image collection, while GPS information can be obtained from a phone or dedicated GPS receiver. VS Code, Jupyter Notebook, Git, Python, Node.js, and a modern web browser are suitable for development and testing.
+
+PROJECT PLANNING
+
+The project is developed in incremental modules so that each review demonstrates a working foundation and later AI and geospatial features build on validated data and interfaces.
+
+Phase 1 – Problem definition and research: Identify the road-condition monitoring problem, review recent research, define the scope, select the damage categories, identify the dataset, and finalize the research objectives. This phase establishes the technical and research direction.
+
+Phase 2 – Architecture and repository setup: Define the computer-vision pipeline, backend, database schema, frontend/dashboard, model-training notebooks, mapping layer, documentation, diagrams, and testing structure. Establish the Python + detection model + FastAPI + database + map architecture.
+
+Phase 3 – Dataset preparation and exploratory analysis: Download and organize the selected road-damage dataset, inspect class distributions, convert annotations when required, resize images, create train/validation/test splits, and apply suitable augmentation. Additional local images can be reserved for external validation.
+
+Phase 4 – Detection model: Train the selected YOLO-family model, tune image size and training parameters, evaluate validation performance, inspect false positives and false negatives, and select an appropriate confidence threshold for the prototype.
+
+Phase 5 – Geospatial integration: Define the detection-record schema and connect model outputs with GPS coordinates and timestamps. Implement duplicate handling where repeated frames correspond to the same physical road defect.
+
+Phase 6 – Dashboard and analytics: Develop summary statistics, damage-type filters, severity-oriented views, image inspection, and an interactive map. Provide users with enough context to review detections instead of showing only raw model output.
+
+Phase 7 – Testing, evaluation and final integration: Perform functional testing, model evaluation, localization checks, dashboard usability testing, and end-to-end route demonstrations. Compare results across different road scenes and document limitations.
+
+Individual contribution for Prem Bhandakkar: computer-vision pipeline planning; dataset preparation and annotation handling; YOLO model experimentation; OpenCV-based image processing; geospatial data-flow design; backend/model integration support; testing, debugging, and technical documentation.
+
+For the first review, the main milestone is to demonstrate that the problem, research direction, architecture, dataset strategy, and initial detection workflow are established. The next milestone is to train and evaluate the detector and connect validated predictions to structured GPS records. Subsequent milestones progressively add mapping, dashboard analytics, severity-oriented analysis, and complete end-to-end testing.
+
+The project will be tracked through module-wise milestones rather than attempting every feature simultaneously. This reduces technical risk, allows individual components to be validated independently, and provides demonstrable progress during each project review.
+
+KEY REFERENCES
+
+• Maeda, H., Sekimoto, Y., Seto, T., Kashiyama, T. & Omata, H. (2018). Road Damage Detection and Classification Using Deep Neural Networks with Smartphone Images. Computer-Aided Civil and Infrastructure Engineering, 33, 1127–1141.
+
+• Arya, D., Maeda, H., Ghosh, S. K., Toshniwal, D. & Sekimoto, Y. (2024). RDD2022: A multi-national image dataset for automatic road damage detection. Geoscience Data Journal, 11, 846–862.
+
+• Arya, D. et al. (2022). RDD2022: A multi-national image dataset for automatic Road Damage Detection. arXiv:2209.08538.
+
+• Redmon, J., Divvala, S., Girshick, R. & Farhadi, A. (2016). You Only Look Once: Unified, Real-Time Object Detection. Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition, 779–788.
+
+• Redmon, J. & Farhadi, A. (2016). YOLO9000: Better, Faster, Stronger. arXiv:1612.08242.
+
+• RDD2022 Dataset. The multi-national Road Damage Dataset released through CRDDC’2022. Figshare repository.
+
+• Ultralytics. YOLO documentation and model-development resources for object detection and deployment.
+
+• OpenStreetMap Foundation. OpenStreetMap data and mapping resources for geographic visualization.
+
+• Leaflet. Open-source JavaScript library for interactive mobile-friendly maps.
+
+Name & Signature of all students in the Group                    
+
+Name & Signature               Name & Signature                            Name & Signature 
+
+Panel Member 1                   Panel Member 2                                Panel Member 3 
+
+Name & Signature                                                                         Dr. Yogesh Mali 
+
+Project Guide                                                                            Project Cordinator 
+
+Milestone
+
+Status for Review 1
+
+Next Step
+
+Target
+
+Problem & research
+
+Completed
+
+Refine literature evidence
+
+Review 1
+
+Architecture & repo
+
+Completed
+
+Backend integration
+
+Next phase
+
+UI prototype
+
+In progress / demonstrable
+
+Polish and connect data
+
+Next phase
+
+Scheme dataset
+
+Initial structured data
+
+Expand + validate records
+
+Next phase
+
+Eligibility engine
+
+Planned / foundation ready
+
+Implement rule engine
+
+Next phase
+
+AI ranking + analytics
+
+Planned
+
+Model development & evaluation
+
+Later phase
+
+ 

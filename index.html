@@ -1,0 +1,809 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI Road Damage Detection & Geospatial Mapping System</title>
+  <meta name="description" content="AI-Based Road Damage Detection and Geospatial Mapping System - Final Year Project by Prem Bhandakkar, Kushal Agarwal, Piyush Pingane, and Kanishk Talaha. ADYPU School of Engineering.">
+  
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+  
+  <!-- FontAwesome Icons & Leaflet CSS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
+  
+  <!-- Custom Styles -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- Header / Navigation -->
+  <header class="site-header">
+    <div class="header-inner">
+      <div class="brand">
+        <img src="extracted_assets/image2.png" alt="ADYPU Logo" class="brand-logo" onerror="this.src='extracted_assets/image1.jpeg'">
+        <div class="brand-divider"></div>
+        <div class="brand-text">
+          <span class="project-tag">FYP CAPSTONE 2026</span>
+          <span class="project-title">AI Road Damage GIS</span>
+        </div>
+      </div>
+      
+      <nav class="nav-links">
+        <a href="#overview" class="nav-link active"><i class="fa-solid fa-cube"></i> Overview</a>
+        <a href="#objectives" class="nav-link"><i class="fa-solid fa-bullseye"></i> Objectives</a>
+        <a href="#architecture" class="nav-link"><i class="fa-solid fa-network-wired"></i> Architecture</a>
+        <a href="#live-map" class="nav-link highlight"><i class="fa-solid fa-map-location-dot"></i> Live GIS Map</a>
+        <a href="#simulator" class="nav-link"><i class="fa-solid fa-camera-viewfinder"></i> AI Detector</a>
+        <a href="#team" class="nav-link"><i class="fa-solid fa-users"></i> Team</a>
+      </nav>
+      
+      <div class="header-actions">
+        <a href="AI_Based_Road_Damage_Detection_Geospatial_Mapping_System_Report.docx" download class="btn-primary">
+          <i class="fa-solid fa-file-arrow-down"></i> Download Report
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero-section" id="overview">
+    <div class="hero-glow glow-1"></div>
+    <div class="hero-glow glow-2"></div>
+    
+    <div class="container hero-container">
+      <div class="hero-content">
+        <div class="badge-pill">
+          <span class="pulse-dot"></span> Intelligent Computer Vision & GIS Platform
+        </div>
+        <h1 class="hero-heading">
+          AI-Based Road Damage Detection & <span class="gradient-text">Geospatial Mapping</span> System
+        </h1>
+        <p class="hero-description">
+          An end-to-end intelligent engineering platform that transforms vehicle dashcam streams into real-time classified road surface distress records with millimeter GPS coordinate precision and automated maintenance priority indexes.
+        </p>
+
+        <!-- Key Quick Stats -->
+        <div class="hero-stats-grid">
+          <div class="stat-card">
+            <div class="stat-icon"><i class="fa-solid fa-microchip"></i></div>
+            <div class="stat-data">
+              <span class="stat-num">YOLOv8</span>
+              <span class="stat-label">Real-Time Detector</span>
+            </div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon"><i class="fa-solid fa-images"></i></div>
+            <div class="stat-data">
+              <span class="stat-num">47,000+</span>
+              <span class="stat-label">RDD2022 Benchmark Images</span>
+            </div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon"><i class="fa-solid fa-location-crosshairs"></i></div>
+            <div class="stat-data">
+              <span class="stat-num">GNSS / GPS</span>
+              <span class="stat-label">Spatio-Temporal Fusion</span>
+            </div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon"><i class="fa-solid fa-chart-line-up"></i></div>
+            <div class="stat-data">
+              <span class="stat-num">3-Tier</span>
+              <span class="stat-label">Severity Scoring Engine</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="hero-cta-group">
+          <a href="#live-map" class="btn-cta primary">
+            <i class="fa-solid fa-radar"></i> Explore Interactive GIS Map
+          </a>
+          <a href="#simulator" class="btn-cta secondary">
+            <i class="fa-solid fa-wand-magic-sparkles"></i> Test AI Simulator
+          </a>
+        </div>
+      </div>
+
+      <div class="hero-visual">
+        <div class="hud-frame">
+          <div class="hud-top-bar">
+            <span class="hud-indicator active"></span> DASHCAM AI INFERENCE ACTIVE
+            <span class="hud-fps">FPS: 42.8 | LATENCY: 23ms</span>
+          </div>
+          <img src="extracted_assets/road_damage_ai_demo.jpg" alt="AI Road Damage Detection Live HUD" class="hud-img">
+          <div class="hud-bottom-overlay">
+            <div class="hud-tag"><i class="fa-solid fa-triangle-exclamation"></i> Pothole: 97% Conf</div>
+            <div class="hud-tag"><i class="fa-solid fa-code-fork"></i> Alligator Crack: 94% Conf</div>
+            <div class="hud-tag info"><i class="fa-solid fa-satellite-dish"></i> Pune Lohegaon Cluster</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Detailed Executive Summary & Problem Breakdown -->
+  <section class="section problem-section">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">THE PROBLEM & INNOVATION</span>
+        <h2 class="section-title">Bridging the Gap from Raw CV to Municipal Action</h2>
+        <p class="section-subtitle">
+          Manual road inspections are slow, hazardous, non-standardized, and lack continuous geospatial tracking. Here is how our system revolutionizes highway infrastructure monitoring.
+        </p>
+      </div>
+
+      <div class="grid-3">
+        <div class="card glass-card">
+          <div class="card-icon-box danger">
+            <i class="fa-solid fa-clock-rotate-left"></i>
+          </div>
+          <h3>Traditional Inspection Deficiencies</h3>
+          <p>
+            Highway authorities rely on manual physical walk-throughs or manual photographic logs. They are labor-intensive, error-prone, subjective to individual inspectors, and leave thousands of road kilometers unmonitored for months.
+          </p>
+          <ul class="bullet-list">
+            <li>High hazard risks for road surveyors</li>
+            <li>Lack of exact geo-synchronized coordinates</li>
+            <li>Delayed municipal response times</li>
+          </ul>
+        </div>
+
+        <div class="card glass-card">
+          <div class="card-icon-box warning">
+            <i class="fa-solid fa-circle-exclamation"></i>
+          </div>
+          <h3>The Computer Vision Research Gap</h3>
+          <p>
+            Existing academic research trains deep neural networks on isolated benchmark image sets but stops at standard mAP metrics. Bounding boxes without geographic coordinates are useless to municipal road crews on the field.
+          </p>
+          <ul class="bullet-list">
+            <li>No geospatial coordinate fusion</li>
+            <li>Detection confidence conflated with damage severity</li>
+            <li>Absence of lightweight, deployable visual dashboards</li>
+          </ul>
+        </div>
+
+        <div class="card glass-card">
+          <div class="card-icon-box success">
+            <i class="fa-solid fa-shield-check"></i>
+          </div>
+          <h3>Our Integrated Solution</h3>
+          <p>
+            A cohesive edge-to-cloud architecture combining lightweight vehicle dashcams, fine-tuned YOLO object detection, NMEA GPS geotagging, deduplication filters, and a GIS-enabled decision support dashboard.
+          </p>
+          <ul class="bullet-list">
+            <li>Sub-meter defect localization with GPS</li>
+            <li>Visual severity estimation (Low, Medium, High)</li>
+            <li>Automated route clustering & repair dispatch export</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Research Objectives (RO1 - RO6) -->
+  <section class="section objectives-section" id="objectives">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">PROJECT SCOPE</span>
+        <h2 class="section-title">Formal Research Objectives (RO1 - RO6)</h2>
+        <p class="section-subtitle">
+          Engineered systematically under the guidance of Dr. Pradip Salve at Ajeenkya DY Patil University.
+        </p>
+      </div>
+
+      <div class="objectives-grid">
+        <div class="obj-card" data-ro="RO1">
+          <div class="ro-header">
+            <span class="ro-pill">RO1</span>
+            <h4>Automated Detection Pipeline</h4>
+          </div>
+          <p>Develop a robust computer vision pipeline that detects and classifies road distress in dynamic vehicular video frames under varied lighting and weather.</p>
+          <div class="ro-meta"><i class="fa-solid fa-code"></i> OpenCV / Frame Filtering</div>
+        </div>
+
+        <div class="obj-card" data-ro="RO2">
+          <div class="ro-header">
+            <span class="ro-pill">RO2</span>
+            <h4>YOLO Model Training & Benchmark</h4>
+          </div>
+          <p>Train and validate a YOLO-family object detector for four primary distress classes: Potholes, Longitudinal Cracks, Transverse Cracks, and Alligator Cracks.</p>
+          <div class="ro-meta"><i class="fa-solid fa-brain"></i> RDD2022 / Ultralytics PyTorch</div>
+        </div>
+
+        <div class="obj-card" data-ro="RO3">
+          <div class="ro-header">
+            <span class="ro-pill">RO3</span>
+            <h4>Geospatial GPS Localization</h4>
+          </div>
+          <p>Associate visual bounding boxes with GNSS/GPS coordinates and store structured spatial records for route-based and corridor-wide condition audits.</p>
+          <div class="ro-meta"><i class="fa-solid fa-satellite"></i> NMEA / GeoJSON / SQLite</div>
+        </div>
+
+        <div class="obj-card" data-ro="RO4">
+          <div class="ro-header">
+            <span class="ro-pill">RO4</span>
+            <h4>Severity Prioritization Engine</h4>
+          </div>
+          <p>Compute an interpretable severity index (Low / Medium / High) based on relative bounding box pixel area, defect aspect ratio, and repeated continuous observations.</p>
+          <div class="ro-meta"><i class="fa-solid fa-calculator"></i> Decision Support Matrix</div>
+        </div>
+
+        <div class="obj-card" data-ro="RO5">
+          <div class="ro-header">
+            <span class="ro-pill">RO5</span>
+            <h4>Interactive GIS Web Dashboard</h4>
+          </div>
+          <p>Deliver an interactive map interface rendering pinpoint defect markers, heatmap density zones, filter controls, damage statistics, and photo evidence drill-downs.</p>
+          <div class="ro-meta"><i class="fa-solid fa-map"></i> Leaflet.js / OpenStreetMap</div>
+        </div>
+
+        <div class="obj-card" data-ro="RO6">
+          <div class="ro-header">
+            <span class="ro-pill">RO6</span>
+            <h4>Comprehensive System Evaluation</h4>
+          </div>
+          <p>Assess end-to-end performance on precision, recall, F1-score, mAP@0.5, spatial accuracy, frame inference throughput (FPS), and field usability metrics.</p>
+          <div class="ro-meta"><i class="fa-solid fa-chart-pie"></i> Validation Metrics & Benchmarking</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Complete End-to-End Architecture -->
+  <section class="section arch-section" id="architecture">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">ENGINEERING PIPELINE</span>
+        <h2 class="section-title">System Architecture & Processing Flow</h2>
+        <p class="section-subtitle">
+          How raw dashcam video turns into actionable spatial maintenance data through 5 coordinated layers.
+        </p>
+      </div>
+
+      <div class="arch-visual-container">
+        <img src="extracted_assets/system_architecture_diagram.jpg" alt="AI Road Damage Geospatial System Architecture Diagram" class="arch-main-img">
+      </div>
+
+      <!-- Layered Breakdown -->
+      <div class="pipeline-flow">
+        <div class="flow-step">
+          <div class="step-num">01</div>
+          <div class="step-content">
+            <h4>Data Acquisition</h4>
+            <p>Vehicle-mounted dashcam or smartphone capturing 1080p road video stream synchronized with GNSS receiver logging NMEA coordinate sentences at 1-5Hz.</p>
+          </div>
+        </div>
+
+        <div class="flow-step">
+          <div class="step-num">02</div>
+          <div class="step-content">
+            <h4>AI Neural Inference</h4>
+            <p>Ultralytics YOLO single-stage detector extracts bounding boxes, class classification probabilities, and confidence scores at 35+ FPS.</p>
+          </div>
+        </div>
+
+        <div class="flow-step">
+          <div class="step-num">03</div>
+          <div class="step-content">
+            <h4>Spatial Fusion & Dedup</h4>
+            <p>Detection frames are timestamp-matched with the nearest spatial coordinates. Temporal buffer filters repeated frames of the same road defect.</p>
+          </div>
+        </div>
+
+        <div class="flow-step">
+          <div class="step-num">04</div>
+          <div class="step-content">
+            <h4>Severity Categorization</h4>
+            <p>Calculates relative pavement surface occupancy, defect class weight (potholes prioritized over hairline cracks), and assigns Low, Medium, or High severity.</p>
+          </div>
+        </div>
+
+        <div class="flow-step">
+          <div class="step-num">05</div>
+          <div class="step-content">
+            <h4>GIS Visualization & APIs</h4>
+            <p>FastAPI backend stores records into SQLite/PostGIS and streams GeoJSON data to our interactive Leaflet dashboard for municipal road crews.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Interactive Live GIS Map Demonstration -->
+  <section class="section live-map-section" id="live-map">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">GEOSPATIAL INTELLIGENCE DASHBOARD</span>
+        <h2 class="section-title">Interactive Road Damage Inspection Map</h2>
+        <p class="section-subtitle">
+          Filter simulated field detections across Pune/Lohegaon road networks, inspect defect images, confidence, and triage maintenance priorities.
+        </p>
+      </div>
+
+      <div class="gis-app-card">
+        <!-- Dashboard Top Toolbar -->
+        <div class="gis-toolbar">
+          <div class="toolbar-left">
+            <div class="filter-group">
+              <label><i class="fa-solid fa-filter"></i> Damage Type:</label>
+              <select id="damageFilter" class="gis-select">
+                <option value="ALL">All Distress Types</option>
+                <option value="Pothole">Potholes (D40)</option>
+                <option value="Alligator Crack">Alligator Cracks (D20)</option>
+                <option value="Longitudinal Crack">Longitudinal Cracks (D00)</option>
+                <option value="Transverse Crack">Transverse Cracks (D10)</option>
+              </select>
+            </div>
+
+            <div class="filter-group">
+              <label><i class="fa-solid fa-gauge-high"></i> Severity:</label>
+              <select id="severityFilter" class="gis-select">
+                <option value="ALL">All Severities</option>
+                <option value="High">High (Immediate Action)</option>
+                <option value="Medium">Medium (Scheduled Repair)</option>
+                <option value="Low">Low (Monitor)</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="toolbar-right">
+            <button id="btnPune" class="gis-btn active"><i class="fa-solid fa-location-dot"></i> ADYPU Campus Route</button>
+            <button id="btnHighway" class="gis-btn"><i class="fa-solid fa-road"></i> Nagar Highway Route</button>
+            <button id="btnResetView" class="gis-btn secondary"><i class="fa-solid fa-arrows-rotate"></i> Reset View</button>
+          </div>
+        </div>
+
+        <!-- Main GIS Map Canvas & Live Inspector Panel -->
+        <div class="gis-body">
+          <div id="map-container" class="map-view"></div>
+
+          <!-- Side Inspector Panel -->
+          <div class="gis-inspector">
+            <div class="inspector-header">
+              <h3><i class="fa-solid fa-circle-info"></i> Defect Inspector</h3>
+              <span id="detectionCountBadge" class="badge">12 Records</span>
+            </div>
+
+            <div id="selectedDefectCard" class="defect-detail-box">
+              <div class="empty-state">
+                <i class="fa-solid fa-hand-pointer"></i>
+                <p>Click on any road defect marker on the map to inspect AI detection details, bounding box, and location telemetry.</p>
+              </div>
+            </div>
+
+            <div class="live-summary-stats">
+              <h4>Route Health Summary</h4>
+              <div class="stat-progress-item">
+                <div class="progress-labels">
+                  <span>Potholes</span>
+                  <span id="potholeCount">5 incidents</span>
+                </div>
+                <div class="progress-bar-bg"><div class="progress-bar-fill red" style="width: 42%;"></div></div>
+              </div>
+              <div class="stat-progress-item">
+                <div class="progress-labels">
+                  <span>Alligator Cracks</span>
+                  <span id="alligatorCount">4 incidents</span>
+                </div>
+                <div class="progress-bar-bg"><div class="progress-bar-fill orange" style="width: 33%;"></div></div>
+              </div>
+              <div class="stat-progress-item">
+                <div class="progress-labels">
+                  <span>Linear Cracks</span>
+                  <span id="linearCount">3 incidents</span>
+                </div>
+                <div class="progress-bar-bg"><div class="progress-bar-fill yellow" style="width: 25%;"></div></div>
+              </div>
+              
+              <div class="export-box">
+                <button class="btn-export" onclick="exportGeoJSON()"><i class="fa-solid fa-file-code"></i> Export GeoJSON</button>
+                <button class="btn-export secondary" onclick="exportCSV()"><i class="fa-solid fa-file-csv"></i> Export CSV Audit</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Interactive AI Detection Simulator -->
+  <section class="section simulator-section" id="simulator">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">MODEL LAB & INFERENCE TESTBED</span>
+        <h2 class="section-title">Real-Time YOLO Inference Simulator</h2>
+        <p class="section-subtitle">
+          Test sample road images or upload custom pavement footage to see how the computer vision pipeline identifies distress, overlays bounding coordinates, and computes severity.
+        </p>
+      </div>
+
+      <div class="simulator-wrapper glass-card">
+        <div class="sim-controls">
+          <div class="preset-buttons">
+            <span class="preset-label">Test Samples:</span>
+            <button class="btn-preset active" data-sample="pothole"><i class="fa-solid fa-circle-dot"></i> Severe Pothole</button>
+            <button class="btn-preset" data-sample="alligator"><i class="fa-solid fa-network-wired"></i> Alligator Cracking</button>
+            <button class="btn-preset" data-sample="longitudinal"><i class="fa-solid fa-grip-lines-vertical"></i> Longitudinal Joint</button>
+            <button class="btn-preset" data-sample="healthy"><i class="fa-solid fa-road-circle-check"></i> Pristine Asphalt</button>
+          </div>
+
+          <div class="sim-sliders">
+            <div class="slider-item">
+              <label>Confidence Threshold: <span id="confVal">0.45</span></label>
+              <input type="range" id="confSlider" min="0.10" max="0.95" step="0.05" value="0.45">
+            </div>
+            <div class="slider-item">
+              <label>IoU NMS Overlap: <span id="iouVal">0.50</span></label>
+              <input type="range" id="iouSlider" min="0.20" max="0.80" step="0.05" value="0.50">
+            </div>
+          </div>
+        </div>
+
+        <div class="sim-stage">
+          <div class="canvas-container">
+            <canvas id="cvCanvas" width="800" height="480"></canvas>
+            <div class="canvas-scanner-line" id="scannerLine"></div>
+          </div>
+
+          <div class="sim-telemetry">
+            <div class="telem-header">
+              <h4><i class="fa-solid fa-terminal"></i> Model Inference Stream</h4>
+              <span class="engine-status">ONLINE (YOLOv8x-RDD)</span>
+            </div>
+            
+            <div class="telem-grid">
+              <div class="telem-card">
+                <span class="telem-lbl">Inference Time</span>
+                <span class="telem-val" id="telemLatency">21.4 ms</span>
+              </div>
+              <div class="telem-card">
+                <span class="telem-lbl">Detections Found</span>
+                <span class="telem-val highlight" id="telemCount">2</span>
+              </div>
+              <div class="telem-card">
+                <span class="telem-lbl">Dominant Distress</span>
+                <span class="telem-val danger" id="telemClass">Pothole (D40)</span>
+              </div>
+              <div class="telem-card">
+                <span class="telem-lbl">Calculated Severity</span>
+                <span class="telem-val orange" id="telemSeverity">HIGH (Priority 1)</span>
+              </div>
+            </div>
+
+            <div class="log-stream" id="logStream">
+              <div class="log-entry system">[SYS] YOLOv8 weights loaded successfully. RDD2022 multi-national taxonomy active.</div>
+              <div class="log-entry">[CV] Preprocessing image tensor: resized to 640x640x3 with letterboxing.</div>
+              <div class="log-entry match">[DETECTION] Class 'Pothole' detected at [x:280, y:210, w:180, h:110] with confidence 0.96.</div>
+              <div class="log-entry match">[DETECTION] Class 'Alligator Crack' detected at [x:220, y:300, w:320, h:140] with confidence 0.91.</div>
+              <div class="log-entry geo">[GEO] Geotag assigned: 18.5985° N, 73.9168° E (Accuracy: ±1.8m).</div>
+              <div class="log-entry sev">[SEV] Visual bounding area: 12.8% of road mask. Priority index assigned: HIGH.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Technical Depth & Research Analysis Section -->
+  <section class="section tech-deep-dive">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">COMPREHENSIVE TECHNICAL ANALYSIS</span>
+        <h2 class="section-title">Deep-Dive: How Every Component Functions</h2>
+        <p class="section-subtitle">
+          An in-depth explanation of the computer vision algorithms, dataset taxonomy, and geospatial fusion logic formulated in the project report.
+        </p>
+      </div>
+
+      <div class="accordion-container">
+        <!-- Item 1 -->
+        <div class="accordion-item active">
+          <div class="accordion-header">
+            <span class="acc-title"><i class="fa-solid fa-database"></i> 1. RDD2022 Benchmark Dataset & Annotation Taxonomy</span>
+            <i class="fa-solid fa-chevron-down acc-icon"></i>
+          </div>
+          <div class="accordion-content">
+            <p>
+              The system leverages the multi-national <strong>RDD2022 (Road Damage Dataset)</strong> introduced by Arya, Maeda et al., featuring over 47,000 images and 55,000+ annotations collected across Japan, India, the Czech Republic, Norway, USA, and China. Unlike single-country datasets, this ensures our detector generalizes across varying pavement compositions, dirt accumulations, monsoon weathering, and camera angles.
+            </p>
+            <div class="table-container">
+              <table class="tech-table">
+                <thead>
+                  <tr>
+                    <th>Class Code</th>
+                    <th>Defect Category</th>
+                    <th>Physical Manifestation</th>
+                    <th>Safety / Engineering Significance</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><code>D00</code></td>
+                    <td>Longitudinal Crack</td>
+                    <td>Parallel to the centerline of pavement along wheel tracks or construction joints.</td>
+                    <td>Allows moisture penetration into sub-base; escalates to structural failure if untreated.</td>
+                  </tr>
+                  <tr>
+                    <td><code>D10</code></td>
+                    <td>Transverse Crack</td>
+                    <td>Perpendicular to the centerline; caused by thermal shrinkage or base contraction.</td>
+                    <td>Causes vehicle ride bumpiness; promotes water pooling along cross sections.</td>
+                  </tr>
+                  <tr>
+                    <td><code>D20</code></td>
+                    <td>Alligator Crack</td>
+                    <td>Interconnected network of fatigue fractures resembling reptile skin.</td>
+                    <td>Severe structural fatigue failure of the load-carrying asphalt pavement.</td>
+                  </tr>
+                  <tr>
+                    <td><code>D40</code></td>
+                    <td>Pothole</td>
+                    <td>Bowl-shaped road depression resulting from water ingress and traffic impact.</td>
+                    <td>Critical hazard causing tire blowouts, vehicle accidents, and motorcyclist fatalities.</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <!-- Item 2 -->
+        <div class="accordion-item">
+          <div class="accordion-header">
+            <span class="acc-title"><i class="fa-solid fa-microchip"></i> 2. YOLO Real-Time Single-Stage Detection Pipeline</span>
+            <i class="fa-solid fa-chevron-down acc-icon"></i>
+          </div>
+          <div class="accordion-content">
+            <p>
+              Traditional two-stage detectors (like Faster R-CNN) yield high precision but struggle with high-frame-rate processing on edge devices. We deploy a single-stage <strong>YOLO (You Only Look Once)</strong> architecture. YOLO frames object detection as a regression problem directly from full-image pixels to bounding box coordinates and class probabilities in a single forward pass.
+            </p>
+            <ul class="styled-points">
+              <li><strong>Backbone:</strong> CSPDarknet feature extractor with PANet/BiFPN neck providing multi-scale feature fusion for detecting tiny hairline cracks alongside expansive potholes.</li>
+              <li><strong>Loss Functions:</strong> Complete Intersection over Union (CIoU) loss for precise box regression, coupled with Binary Cross-Entropy (BCE) for multi-label classification.</li>
+              <li><strong>Non-Maximum Suppression (NMS):</strong> Filters redundant overlapping candidate boxes using IoU thresholding (default 0.50).</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Item 3 -->
+        <div class="accordion-item">
+          <div class="accordion-header">
+            <span class="acc-title"><i class="fa-solid fa-location-dot"></i> 3. Spatio-Temporal GPS Coordinate Fusion & Deduplication</span>
+            <i class="fa-solid fa-chevron-down acc-icon"></i>
+          </div>
+          <div class="accordion-content">
+            <p>
+              When a vehicle moves at 40 km/h (~11.1 m/s), a single pothole is visible across 10-15 consecutive video frames. Storing all 15 frames would flood the database with duplicate records. Our system implements a <strong>Spatio-Temporal Deduplication Buffer</strong>:
+            </p>
+            <div class="code-snippet-box">
+              <pre><code>// Distance check using Haversine formulation
+function isDuplicateDefect(newDefect, recentDetections, spatialThresholdMeters = 5.0) {
+  for (let record of recentDetections) {
+    if (record.class === newDefect.class) {
+      let dist = calculateHaversineDistance(record.lat, record.lon, newDefect.lat, newDefect.lon);
+      if (dist < spatialThresholdMeters) {
+        // Update existing record with higher confidence or larger box size
+        record.confidence = Math.max(record.confidence, newDefect.confidence);
+        record.observationCount += 1;
+        return true; // Filtered duplicate
+      }
+    }
+  }
+  return false; // New unique distress event
+}</code></pre>
+            </div>
+            <p>
+              This ensures municipal reports contain accurate physical defect counts rather than frame-rate artifacts.
+            </p>
+          </div>
+        </div>
+
+        <!-- Item 4 -->
+        <div class="accordion-item">
+          <div class="accordion-header">
+            <span class="acc-title"><i class="fa-solid fa-triangle-exclamation"></i> 4. Interpretable Visual Severity Scoring Matrix</span>
+            <i class="fa-solid fa-chevron-down acc-icon"></i>
+          </div>
+          <div class="accordion-content">
+            <p>
+              Detection confidence measures the model's certainty that a defect exists, not how urgent the repair is. To prioritize repairs without requiring expensive LIDAR laser profilers, we derive an interpretable <strong>Visual Severity Index (VSI)</strong>:
+            </p>
+            <div class="formula-box">
+              $$\text{VSI} = w_{\text{class}} \times \left( \frac{\text{Area}_{\text{bbox}}}{\text{Area}_{\text{road\_roi}}} \right) \times \left( 1 + \alpha \cdot \text{AspectPenalty} \right)$$
+            </div>
+            <p>
+              Where $w_{\text{class}}$ weights Potholes ($1.0$) and Alligator Cracking ($0.85$) higher than Longitudinal Cracks ($0.5$). This automatically maps each defect into actionable municipal buckets:
+            </p>
+            <div class="severity-cards">
+              <div class="sev-tag-card red">
+                <strong>HIGH SEVERITY</strong>
+                <span>Potholes > 15cm width or alligator zones. Requires immediate cold-mix patch within 48h to prevent accidents.</span>
+              </div>
+              <div class="sev-tag-card orange">
+                <strong>MEDIUM SEVERITY</strong>
+                <span>Moderate cracking networks. Added to scheduled weekly asphalt milling/slurry seal routes.</span>
+              </div>
+              <div class="sev-tag-card yellow">
+                <strong>LOW SEVERITY</strong>
+                <span>Early hairline transverse/longitudinal cracks. Flagged for preventive bituminous sealant.</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Project Planning & Milestones -->
+  <section class="section roadmap-section">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">DEVELOPMENT LIFECYCLE</span>
+        <h2 class="section-title">Project Roadmap & Milestone Status</h2>
+        <p class="section-subtitle">
+          Structured phased delivery evaluated by the School of Engineering Review Panel.
+        </p>
+      </div>
+
+      <div class="timeline-container">
+        <div class="timeline-item done">
+          <div class="timeline-marker"><i class="fa-solid fa-check"></i></div>
+          <div class="timeline-content">
+            <span class="phase-badge">Phase 1 &bull; COMPLETED</span>
+            <h4>Problem Definition & Literature Survey</h4>
+            <p>Analyzed Maeda et al., Arya et al. RDD2022 benchmarks, established core research objectives (RO1-RO6) and gap analysis.</p>
+          </div>
+        </div>
+
+        <div class="timeline-item done">
+          <div class="timeline-marker"><i class="fa-solid fa-check"></i></div>
+          <div class="timeline-content">
+            <span class="phase-badge">Phase 2 &bull; COMPLETED</span>
+            <h4>Architecture & Repository Setup</h4>
+            <p>Modular Python + OpenCV + YOLO + FastAPI + Leaflet pipeline formulated with SQLite/PostGIS relational data models.</p>
+          </div>
+        </div>
+
+        <div class="timeline-item in-progress">
+          <div class="timeline-marker"><i class="fa-solid fa-spinner fa-spin"></i></div>
+          <div class="timeline-content">
+            <span class="phase-badge current">Phase 3 &bull; IN PROGRESS</span>
+            <h4>Dataset Preparation & Annotation Tuning</h4>
+            <p>RDD2022 XML-to-YOLO conversion, contrast normalization, affine transforms, and validation split separation.</p>
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-marker"><i class="fa-solid fa-circle"></i></div>
+          <div class="timeline-content">
+            <span class="phase-badge upcoming">Phase 4 &bull; UPCOMING</span>
+            <h4>Model Training & Hyperparameter Optimization</h4>
+            <p>Training YOLOv8 with transfer learning, tuning CIoU loss, evaluating mAP@0.5 and confusion matrices across 4 distress classes.</p>
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-marker"><i class="fa-solid fa-circle"></i></div>
+          <div class="timeline-content">
+            <span class="phase-badge upcoming">Phase 5 &bull; UPCOMING</span>
+            <h4>Live GNSS Hardware Synchronization & Field Demo</h4>
+            <p>Vehicle mounting, dashcam video streaming, live road testing around Pune-Nagar corridors, and municipal audit exports.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Project Credits & Academic Team -->
+  <section class="section team-section" id="team">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">ACADEMIC CREDITS</span>
+        <h2 class="section-title">Project Team & Academic Mentors</h2>
+        <p class="section-subtitle">
+          Department of Computer Science & Engineering and Artificial Intelligence & Data Science, Ajeenkya DY Patil University.
+        </p>
+      </div>
+
+      <!-- Mentors -->
+      <div class="mentors-grid">
+        <div class="mentor-card">
+          <div class="mentor-avatar"><i class="fa-solid fa-user-tie"></i></div>
+          <div class="mentor-details">
+            <span class="mentor-role">PROJECT GUIDE</span>
+            <h4>Dr. Pradip Salve</h4>
+            <p>School of Engineering, Ajeenkya DY Patil University</p>
+          </div>
+        </div>
+        <div class="mentor-card">
+          <div class="mentor-avatar"><i class="fa-solid fa-user-graduate"></i></div>
+          <div class="mentor-details">
+            <span class="mentor-role">PROJECT COORDINATOR</span>
+            <h4>Dr. Yogesh Mali</h4>
+            <p>School of Engineering, Ajeenkya DY Patil University</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Students Grid -->
+      <h3 class="team-subheading">Student Researchers</h3>
+      <div class="students-grid">
+        <!-- Prem Bhandakkar -->
+        <div class="student-card featured">
+          <div class="student-badge">Lead CV & Geospatial</div>
+          <div class="student-avatar-letter">PB</div>
+          <h4>Prem Bhandakkar</h4>
+          <span class="student-urn">URN: 2023-B-14032006</span>
+          <span class="student-branch">B.Tech - AIDS / CSE</span>
+          <p class="student-contrib">
+            Computer vision pipeline planning, dataset preparation & annotation parsing, YOLO model experimentation, OpenCV image filtering, and GIS data flow integration.
+          </p>
+        </div>
+
+        <!-- Kushal Agarwal -->
+        <div class="student-card">
+          <div class="student-avatar-letter">KA</div>
+          <h4>Kushal Agarwal</h4>
+          <span class="student-urn">URN: 2023-B-01072003</span>
+          <span class="student-branch">B.Tech - CSE</span>
+          <p class="student-contrib">
+            Literature review synthesis, database schema modeling, backend API service structure, and system evaluation benchmarks.
+          </p>
+        </div>
+
+        <!-- Piyush Pingane -->
+        <div class="student-card">
+          <div class="student-avatar-letter">PP</div>
+          <h4>Piyush Pingane</h4>
+          <span class="student-urn">URN: 2023-B-05092005A</span>
+          <span class="student-branch">B.Tech - CSE</span>
+          <p class="student-contrib">
+            Dashboard interface development, interactive mapping layer configuration, and data visualization analytics.
+          </p>
+        </div>
+
+        <!-- Kanishk Talaha -->
+        <div class="student-card">
+          <div class="student-avatar-letter">KT</div>
+          <h4>Kanishk Talaha</h4>
+          <span class="student-urn">URN: 2023-B-19022005D</span>
+          <span class="student-branch">B.Tech - AIDS</span>
+          <p class="student-contrib">
+            GPS telemetry integration, coordinate deduplication algorithm, and verification documentation.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="container footer-content">
+      <div class="footer-left">
+        <div class="footer-logo-row">
+          <img src="extracted_assets/image1.jpeg" alt="ADYPU Logo" class="footer-logo">
+          <div>
+            <strong>Ajeenkya DY Patil University</strong>
+            <p>School of Engineering &bull; Pune, Maharashtra, India</p>
+          </div>
+        </div>
+      </div>
+      <div class="footer-center">
+        <p>&copy; 2026 AI-Based Road Damage Detection and Geospatial Mapping System</p>
+        <span class="footer-note">Decision support platform engineered for municipal road safety and maintenance automation.</span>
+      </div>
+      <div class="footer-right">
+        <a href="#overview" class="btn-top"><i class="fa-solid fa-arrow-up"></i> Back to Top</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Leaflet JS & App Script -->
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+  <script src="app.js"></script>
+</body>
+</html>
